@@ -9,7 +9,7 @@ class DocsController < ApplicationController
     def show
     end
 
-    def new
+    def new # responsible for view file
         @doc=Doc.new
     end
 
@@ -24,13 +24,20 @@ class DocsController < ApplicationController
 
     end
 
-    def edit
+    def edit # responsible for view file
     end
 
     def update # does not have view itself
+        if @doc.update(doc_params)
+            redirect_to @doc
+        else
+            render "edit"
+        end
     end
 
     def destroy
+        @doc.destroy
+        redirect_to docs_path
     end
 
     private
