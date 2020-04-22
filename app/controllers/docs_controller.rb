@@ -10,11 +10,13 @@ class DocsController < ApplicationController
     end
 
     def new # responsible for view file
-        @doc=Doc.new
+        #@doc=Doc.new # before associations
+        @doc = current_user.docs.build
     end
 
     def create # does not have view itself
-        @doc=Doc.new(doc_params)
+        #@doc=Doc.new(doc_params) # before associations
+        @doc = current_user.docs.build(doc_params)
 
         if @doc.save
             redirect_to @doc
